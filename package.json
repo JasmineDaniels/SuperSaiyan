@@ -22,5 +22,11 @@
   "bugs": {
     "url": "https://github.com/JasmineDaniels/SuperSaiyan/issues"
   },
-  "homepage": "https://github.com/JasmineDaniels/SuperSaiyan#readme"
+  "homepage": "https://github.com/JasmineDaniels/SuperSaiyan#readme",
+  "dependencies": {
+    "inquirer": "^6.3.1"
+  },
+  "devDependencies": {
+    "jest": "^28.1.2"
+  }
 }
