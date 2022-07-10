@@ -1,0 +1,26 @@
+{
+  "name": "profile-automator",
+  "version": "1.0.0",
+  "description": "Team member profile automator",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JasmineDaniels/SuperSaiyan.git"
+  },
+  "keywords": [
+    "node",
+    "onboard",
+    "prompts",
+    "team",
+    "workflow"
+  ],
+  "author": "Jasmine Daniels",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JasmineDaniels/SuperSaiyan/issues"
+  },
+  "homepage": "https://github.com/JasmineDaniels/SuperSaiyan#readme"
+}
