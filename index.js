@@ -89,13 +89,10 @@ function managerPromise(){
 async function buildManager() {
     try{
         const managerData = await managerPromise()
-
-
-        if (managerData) {
-            console.log(`Manager Info Generated`)
-            //const engineerData = await buildEngineerPromise()
-            // engineerData
-        } 
+        if (managerData) console.log(`Manager Info Generated`);
+             
+        // const engineerData = await buildEngineerPromise()
+        // if (engineerData) console.log(`Engineer Info Created`);
         
 
     } catch (err){
