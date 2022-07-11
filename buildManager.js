@@ -1,7 +1,7 @@
 const inquirer = require('inquirer')
 const fs = require('fs')
 
-class Manager {  
+class Manager {  // return new Manager 
     constructor (name, id, email, officeNum) {
         this.name = name;
         this.id = id;
@@ -32,6 +32,12 @@ class Manager {
             },// test 
         ])
         .then((answers) => {
+            this.name = `${answers.HTML1}`
+            this.id = `${answers.HTML2}`
+            this.email = `${answers.HTML3}`
+            this.officeNum = `${answers.HTML1}`
+
+
             let managerName = `${answers.HTML1}` //this.name = `${answers.HTML1}`
             let managerID = `${answers.HTML2}`   //this.id = `${answers.HTML2}`
             let managerEmail = `${answers.HTML3}`//this.email = `${answers.HTML3}`
@@ -93,6 +99,9 @@ class Manager {
 
 
 }
+
+const buddy = new Manager
+buddy.profileInfo()
 
 module.exports = {
     Manager,

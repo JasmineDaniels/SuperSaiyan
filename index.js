@@ -1,6 +1,9 @@
 console.log(`Program Started`)
 const inquirer = require('inquirer')
 const fs = require('fs')
+const manager = require('./buildManager')
+const engineer = require('./buildEngineer')
+const intern = require('./buildIntern')
 
 // generate 
 function managerPromise(){
@@ -93,14 +96,14 @@ function managerPromise(){
 // async function buildStaff() {
 //     inquirer.prompt(prompts);
 
-//      prompts.next({
+//      prompts.next({Manager.profileInfo()
 
 //})
-//      prompts.next({
+//      prompts.next({Engineer.profileInfo()
 
 //})
 
-//      prompts.next({
+//      prompts.next({Intern.profileInfo()
 
 //})
 
@@ -182,6 +185,10 @@ buildManager()
 //         console.log(err)
 //     })
 // }
+
+
+
+
 
 // class Manager { // do I create a new Manager 
 //     constructor (name, id, email, officeNum) {
