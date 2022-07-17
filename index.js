@@ -1,9 +1,10 @@
 console.log(`Program Started`)
 const inquirer = require('inquirer')
 const fs = require('fs')
-const Manager = require('./buildManager');
-const Engineer  = require('./buildEngineer');
-const Intern = require('./buildIntern');
+const Manager = require('./classes/buildManager');
+const Engineer  = require('./classes/buildEngineer');
+const Intern = require('./classes/buildIntern');
+
 
 //const prompts = new Rx.Subject();
 //Make funtion to ask if engineer or if intern 
@@ -12,64 +13,45 @@ const Intern = require('./buildIntern');
 // allManagers.forEach(newManager => {
         
 // })
-
-let allEngineers = [];
-let allInterns = [];
+let allEmployees = []
+//let allEngineers = [];
+//let allInterns = [];
 let allManagers = [];
 
-// let managerHTML = `
-// <div class="card" style="height:380px; width:300px">
-//     <div class="card-header text-center">
-//         <p><span style="font-weight: bold; font-size: large;">${newManager.name}</span></p>
-//     </div>
-//     <div class="card-body row">
-//         <div class="col text-center mb-3">
-//             <img src="https://dummyimage.com/200X200/a1a1a1/fff" alt="${newManager.name} image">
-//         </div>
-//         <div class="col border-top">
-//             <p>I.D: <span style="font-weight: bold;">${newManager.id}</span><br>
-//             Office No.: <span style="font-weight: bold;">${newManager.officeNum}<br>
-//             <a href="mailto:${newManager.email}">${newManager.name} Email</a>
-//             </p>
-//         </div>
-//     </div>
-// </div>`
 
-// let engineerHTML = `
-// <div class="card" style="height:380px; width:300px">
-//     <div class="card-header text-center">
-//         <p><span style="font-weight: bold; font-size: large;">${newEngineer.name}</span></p>
-//     </div>
-//     <div class="card-body row">
-//         <div class="col text-center mb-3">
-//             <img src="https://dummyimage.com/200X200/a1a1a1/fff" alt="${newEngineer.name} image">
-//         </div>
-//         <div class="col border-top">
-//             <p>I.D: <span style="font-weight: bold;">${newEngineer.id}</span><br>
-//             Github: <a href="https://github.com/${newEngineer.username}">${newEngineer.name} Email</a><br>
-//             <a href="mailto:${newEngineer.email}">${newEngineer.name} Email</a>
-//             </p>
-//         </div>
-//     </div>
-// </div>`
 
-// let internHTML = `
-// <div class="card" style="height:380px; width:300px">
-//     <div class="card-header text-center">
-//         <p><span style="font-weight: bold; font-size: large;">${newIntern.name}</span></p>
-//     </div>
-//     <div class="card-body row">
-//         <div class="col text-center mb-3">
-//             <img src="https://dummyimage.com/200X200/a1a1a1/fff" alt="${newIntern.name} image">
-//         </div>
-//         <div class="col border-top">
-//             <p>I.D: <span style="font-weight: bold;">${newIntern.id}</span><br>
-//             <p>School: <span style="font-weight: bold;">${newIntern.school}</span><br></p><br>
-//             <a href="mailto:${newIntern.email}">${newIntern.name} Email</a>
-//             </p>
-//         </div>
-//     </div>
-// </div>`
+
+
+// let html5 = `<!DOCTYPE html>
+//                 <html lang="en">
+//                     <head>
+//                         <meta charset="UTF-8">
+//                         <meta http-equiv="X-UA-Compatible" content="IE=edge">
+//                         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+//                         <title>Profile Automator</title>
+//                         <!-- Link Bootstrap -->
+//                         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" 
+//                         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" 
+//                         crossorigin="anonymous">
+//                         <!-- Font Awesome -->
+//                         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet">
+//                         <!-- Link CSS -->
+//                         <link rel="stylesheet" href="./style.css">
+//                         <!-- Link Favicon -->
+//                     </head>
+//                     <body>
+//                         <main>
+
+                                    
+
+
+//                         </main>
+                    
+//                         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+//                         <!-- Link JS Script -->
+//                         <script src="./index.js"></script>
+//                     </body>
+//                 </html>`   
 
 
 
@@ -100,11 +82,12 @@ function managerPromise(){
         
         const newManager  = new Manager(answers.HTML1, answers.HTML2, answers.HTML3, answers.HTML4)
         // allManagers.push(newManager)
-        console.log(newManager.getName()) 
-        console.log(newManager.getCard())
+        //console.log(newManager.getName()) 
+        //console.log(newManager.getCard())
         let managerCard = newManager.getCard()
-        allManagers.push(managerCard)
+        allEmployees.push(managerCard)
         //generateManagerHTML(newManager)
+        generateHTMLFile()
         chooseEmployee()
     })
     .catch((err) => {
@@ -141,7 +124,7 @@ function engineerPromise() {
       const newEngineer  = new Engineer(answers.HTML1, answers.HTML2, answers.HTML3, answers.HTML4) 
       //console.log(newEngineer)
       let engineerCard = newEngineer.getCard()
-      allEngineers.push(engineerCard)
+      allEmployees.push(engineerCard)
 
       chooseEmployee2()
     
@@ -176,62 +159,135 @@ function internPromise() {
     ])
     .then((answers) => {
       const newIntern = new Intern(answers.HTML1, answers.HTML2, answers.HTML3, answers.HTML4)
-      allInterns.push(newIntern)
+      let internCard = newIntern.getCard()
+      allEmployees.push(internCard)
       chooseEmployee3()
+    
     })
     .catch((err) => {
         console.log(err)
     })
 }
 
-function generateManagerHTML(){
-    for (let i = 0; i < allManagers.length; i++) {
-        const newManagerCards = allManagers[i];
+function rewriteHTML(){
 
-        
-        let html5 = `<!DOCTYPE html>
-        <html lang="en">
-            <head>
-                <meta charset="UTF-8">
-                <meta http-equiv="X-UA-Compatible" content="IE=edge">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>Profile Automator</title>
-                <!-- Link Bootstrap -->
-                <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" 
-                integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" 
-                crossorigin="anonymous">
-                <!-- Font Awesome -->
-                <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet">
-                <!-- Link CSS -->
-                <link rel="stylesheet" href="./style.css">
-                <!-- Link Favicon -->
-            </head>
-            <body>
-                <main>
+    // fs.readFile('index.html', 'utf-8', (err, data) => {
+    //     err ? console.info(err) : console.log(`Success! ${data}`)
 
-                    ${newManagerCards}
+    //     // let htmlTemplate = data
+    // })
+
+    // const {managerCard, engineerCard, internCard } = allEmployees;
+
+    if (allEmployees.length !== 0) {
+
+        const [ managerCard, engineerCard, internCard ] = allEmployees;
+
+            let html5 = `<!DOCTYPE html>
+                <html lang="en">
+                    <head>
+                        <meta charset="UTF-8">
+                        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                        <title>Profile Automator</title>
+                        <!-- Link Bootstrap -->
+                        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" 
+                        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" 
+                        crossorigin="anonymous">
+                        <!-- Font Awesome -->
+                        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet">
+                        <!-- Link CSS -->
+                        <link rel="stylesheet" href="./style.css">
+                        <!-- Link Favicon -->
+                    </head>
+                    <body>
+                        <main class="text-center">
+
+                            ${managerCard}
+                            ${engineerCard}
+                            ${internCard}
+                            
+                            
 
 
-                </main>
-            
-                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-                <!-- Link JS Script -->
-                <script src="./index.js"></script>
-            </body>
-        </html>`   
 
-        fs.writeFile('index.html', html5, (err) => {
-            err ? console.error(`Oops! Try Again`) : console.log('Success!')
-        });
+                        </main>
+                    
+                        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+                        <!-- Link JS Script -->
+                        <script src="./script.js"></script>
+                    </body>
+                </html>`   
+
+            fs.writeFile('index.html', html5, (err) => {
+                err ? console.error(`Oops! Try Again`) : console.log('Success!')
+            });
+          
     }
-
-    
-
-    
-    
-
 }
 
+//Read HTML data
+// function rewriteHTML(){
+
+//     // fs.readFile('index.html', 'utf-8', (err, data) => {
+//     //     err ? console.info(err) : console.log(`Success! ${data}`)
+
+//     //     // let htmlTemplate = data
+//     // })
+
+//     // const {managerCard, engineerCard, internCard } = allEmployees;
+
+//     if (allEmployees.length !== 0) {
+
+//         const [ managerCard, engineerCard, internCard ] = allEmployees;
+
+//         for (let i = 0; i < allEmployees.length; i++) {
+//             const employeeCards = allEmployees[i];
+            
+//             const [ managerCard, engineerCard, internCard ] = employeeCards
+
+//             let html5 = `<!DOCTYPE html>
+//                 <html lang="en">
+//                     <head>
+//                         <meta charset="UTF-8">
+//                         <meta http-equiv="X-UA-Compatible" content="IE=edge">
+//                         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+//                         <title>Profile Automator</title>
+//                         <!-- Link Bootstrap -->
+//                         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" 
+//                         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" 
+//                         crossorigin="anonymous">
+//                         <!-- Font Awesome -->
+//                         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet">
+//                         <!-- Link CSS -->
+//                         <link rel="stylesheet" href="./style.css">
+//                         <!-- Link Favicon -->
+//                     </head>
+//                     <body>
+//                         <main class="text-center">
+
+//                             ${managerCard}
+//                             ${engineerCard}
+//                             ${internCard}
+                            
+                            
+
+
+
+//                         </main>
+                    
+//                         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+//                         <!-- Link JS Script -->
+//                         <script src="./script.js"></script>
+//                     </body>
+//                 </html>`   
+
+//             fs.writeFile('index.html', html5, (err) => {
+//                 err ? console.error(`Oops! Try Again`) : console.log('Success!')
+//             });
+//         }   
+//     }
+// }
 
 
 function chooseEmployee3 (){
@@ -250,7 +306,8 @@ function chooseEmployee3 (){
     ])
     .then((answers) => {
         if(answers.Option1 == "N"){
-            generateInternHTML()
+            //generateInternHTML()
+            rewriteHTML()
         }
         if (answers.Option1 == "Y"){
             inquirer.prompt([
@@ -298,7 +355,8 @@ function chooseEmployee2(){
     ])
     .then((answers) => {
         if(answers.Option1 == "N"){
-            generateEnginnerHTML()
+            //generateEnginnerHTML()
+            generateManagerHTML()
         }
         if (answers.Option1 == "Y"){
             inquirer.prompt([
@@ -344,7 +402,8 @@ function chooseEmployee(){
     ])
     .then((answers) => {
         if(answers.Option1 == "N"){
-            generateManagerHTML()
+            //generateHTMLFile()
+            //rewriteHTML()
         }
         if (answers.Option1 == "Y"){
             inquirer.prompt([
@@ -394,49 +453,56 @@ function chooseEmployee(){
         
     })
 
-    // {
-    //     type: 'confirm',
-    //     message: 'Build Engineer?', //Y/N
-    //     name: 'Options2',
-    // },
-    // {
-    //     type: 'confirm',
-    //     message: 'Build Intern?', 
-    //     name: 'Options2',
-    // },
 }
 //chooseEmployee()
 
-//Build Staff 
-// function buildStaff() {
-//     //Make funtion to ask if engineer or if intern 
-//     //Loop thru arrays and append to HTML template
-//     //add managers, engineers, inters to HTML
 
-//     try{
 
-//         //Works
-//         const managerData =  managerPromise() //await has no effect on this type of expression
-//         if (managerData) {
-//             console.log(`Manager Info Generated`)
-//         };
+//Write HTML
+function generateHTMLFile(){
+    if (allEmployees.length !== 0) {
+          let html5 = `<!DOCTYPE html>
+                <html lang="en">
+                    <head>
+                        <meta charset="UTF-8">
+                        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                        <title>Profile Automator</title>
+                        <!-- Link Bootstrap -->
+                        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" 
+                        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" 
+                        crossorigin="anonymous">
+                        <!-- Font Awesome -->
+                        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet">
+                        <!-- Link CSS -->
+                        <link rel="stylesheet" href="./style.css">
+                        <!-- Link Favicon -->
+                    </head>
+                    <body>
+                        <main class="text-center">
 
-//         //Doesn't work     
-//         // const engineerData = await buildEngineerPromise()
-//         // if (engineerData) {
-//         //     console.log(`Engineer Info Created`)
-//         // };
+                        
+
+
+                        </main>
+                    
+                        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+                        <!-- Link JS Script -->
+                        <script src="./script.js"></script>
+                    </body>
+                </html>`   
+
+            fs.writeFile('index.html', html5, (err) => {
+                err ? console.error(`Oops! Try Again`) : console.log('Success!')
+            });
+        }
+
         
-
-//     } catch (err){
-//         console.log(err)
-//     }
+            
+        
+        
     
-// }
-//buildStaff()
-
-
-
+}
 
 
 
@@ -547,39 +613,10 @@ function generateEnginnerHTML(){
 
 
 
-// class Manager { // do I create a new Manager 
-//     constructor (name, id, email, officeNum) {
-//         this.name = name;
-//         this.id = id;
-//         this.email = email;
-//         this.officeNum = officeNum;
-//     }
-//     //this.fn 
 
-// }
 
-// let engineerAnswers = () => {
-//     class Engineer extends Manager {
-//         constructor (name, id, email, username) {
-//             //const name 
 
-//             super(name, id, email);
-//             this.username = username;
-//         }
-//     }
 
-// }
-
-// let internAnswers = (answers) => {
-//     class Intern extends Manager {
-//         constructor (name, id, email, username) {
-//             this.name = name;
-//             this.id = id;
-//             this.email = email;
-//             this.username = username;
-//         }
-//     }
-// }
 
 // async function buildStaff() {
 //     //const managerPrompts = new Rx.Subject(Manager.Manager.profileInfo());
@@ -602,3 +639,31 @@ function generateEnginnerHTML(){
 
 // }
 // buildStaff()
+
+//Build Staff 
+// function buildStaff() {
+//     //Make funtion to ask if engineer or if intern 
+//     //Loop thru arrays and append to HTML template
+//     //add managers, engineers, inters to HTML
+
+//     try{
+
+//         //Works
+//         const managerData =  managerPromise() //await has no effect on this type of expression
+//         if (managerData) {
+//             console.log(`Manager Info Generated`)
+//         };
+
+//         //Doesn't work     
+//         // const engineerData = await buildEngineerPromise()
+//         // if (engineerData) {
+//         //     console.log(`Engineer Info Created`)
+//         // };
+        
+
+//     } catch (err){
+//         console.log(err)
+//     }
+    
+// }
+//buildStaff()

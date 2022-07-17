@@ -22,7 +22,7 @@ class Intern extends Employee {
                 </div>
                 <div class="col border-top">
                     <p>I.D: <span style="font-weight: bold;">${this.id}</span><br>
-                    <p>School: <span style="font-weight: bold;">${this.school}</span><br></p><br>
+                    School: <span style="font-weight: bold;">${this.school}</span><br>
                     <a href="mailto:${this.email}">${this.name} Email</a>
                     </p>
                 </div>
