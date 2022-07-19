@@ -9,3 +9,6 @@ package-lock.json
 
 # Ignore helpers (modulization - wip)
 helpers
+
+# Ignore coverage (for testing)
+coverage

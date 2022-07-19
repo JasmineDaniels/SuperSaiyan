@@ -175,7 +175,7 @@ function chooseEmployee3 (){
                     chooseEmployee()
                 }
                 if (answers.Option2 == "N"){
-                    return
+                    return rewriteHTML()
                 }
             })
         }
@@ -199,7 +199,7 @@ function chooseEmployee2(){
     ])
     .then((answers) => {
         if(answers.Option1 == "N"){
-            rewriteHTML()
+            return rewriteHTML()
         }
         if (answers.Option1 == "Y"){
             inquirer.prompt([
@@ -246,6 +246,7 @@ function chooseEmployee(){
     .then((answers) => {
         if(answers.Option1 == "N"){
             rewriteHTML()
+            
         }
         if (answers.Option1 == "Y"){
             inquirer.prompt([
