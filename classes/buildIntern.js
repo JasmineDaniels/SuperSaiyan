@@ -18,7 +18,7 @@ class Intern extends Employee {
                     Position: <span style="font-weight: bold;">Intern</span> 
                 </p>
             </div>
-            <div class="card-body row">
+            <div class="card-body ">
                 <div class="col text-center mb-3">
                     <img src="https://dummyimage.com/200X200/a1a1a1/fff" alt="${this.name} image">
                 </div>

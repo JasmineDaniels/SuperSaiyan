@@ -318,7 +318,7 @@ function generateHTMLFile(allEmployees){
                         <!-- Link Favicon -->
                     </head>
                     <body>
-                        <main class="text-center">
+                        <main class=" row text-center">
 
                          ${allEmployees}
 

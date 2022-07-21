@@ -31,7 +31,11 @@ node index.js
 
 ### Demo Link:
 
-[READMEGen Demo](https://drive.google.com/file/d/1bSbB8JdbHnBto_ZCW7jkaTGrU-if7aTr/view?usp=sharing)
+[Profile Automator Main Menu](https://drive.google.com/file/d/1bRNWX7j-pwChTJRRMOSaM8HF4Kl7FUAY/view?usp=sharing)
+
+[Profile Automator Input Validation](https://drive.google.com/file/d/1f0hPwgeGfey9fDCmDmOQx2Wu8qsS3IUe/view?usp=sharing)
+
+[Profile Automator HTML Demo](https://drive.google.com/file/d/1qzKk99y9cJbapq_hs6QR3qhXGpOvEr3s/view?usp=sharing)
 
 
 ## License

@@ -12,3 +12,6 @@ helpers
 
 # Ignore coverage (for testing)
 coverage
+
+#Ignore demo (for testing html)
+demo
