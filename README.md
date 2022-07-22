@@ -20,10 +20,10 @@ Allows managers to quickly and easily have access to Team Member information.
 
 ### How to Use?
 
-Simply Open index.js
+Simply Open server.js
 
 ```bash
-node index.js
+node server.js
 ```
 & Follow the Prompts
 
